@@ -3,6 +3,7 @@ plugins {
 	id("io.gitlab.arturbosch.detekt").version(Plugins.Versions.detekt)
 	id("org.jetbrains.dokka").version(Plugins.Versions.dokka)
 	id("org.jetbrains.kotlinx.binary-compatibility-validator").version(Plugins.Versions.binaryCompatibilityValidatorVersion)
+	id("org.cqfn.diktat.diktat-gradle-plugin") version "1.0.0-rc.3"
 }
 
 // Versioning
@@ -43,6 +44,7 @@ subprojects {
 	apply<MavenPublishPlugin>()
 	apply<io.gitlab.arturbosch.detekt.DetektPlugin>()
 	apply<org.jetbrains.dokka.gradle.DokkaPlugin>()
+	apply<org.cqfn.diktat.plugin.gradle.DiktatGradlePlugin>()
 
 	// Run block after creating project specific configuration
 	afterEvaluate {
@@ -75,5 +77,14 @@ subprojects {
 		reports {
 			sarif.enabled = true
 		}
+	}
+
+	// Diktat linting
+	diktat {
+		ignoreFailures = true
+		inputs = files("src/**/*.kt")
+		excludes = files("src/**/kotlin-generated/**")
+		reporterType = "html" // TODO sarif?
+		output = file("$buildDir/reports/diktat.html").toString()
 	}
 }
