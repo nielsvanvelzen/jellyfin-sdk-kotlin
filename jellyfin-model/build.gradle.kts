@@ -7,6 +7,18 @@ kotlin {
 	explicitApi()
 
 	jvm()
+	js(IR) {
+		nodejs()
+		browser {
+			testTask {
+				useKarma {
+					useFirefox()
+				}
+			}
+		}
+
+		binaries.library()
+	}
 
 	sourceSets {
 		val commonMain by getting {

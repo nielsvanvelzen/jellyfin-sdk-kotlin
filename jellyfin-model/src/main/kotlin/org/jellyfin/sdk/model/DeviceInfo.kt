@@ -1,8 +1,11 @@
 package org.jellyfin.sdk.model
 
+import kotlin.js.JsExport
+
 /**
  * The device information is used to identify the device the client application is running on.
  */
+@JsExport
 public data class DeviceInfo(
 	/**
 	 * Unique id of the device. Only one user may be authenticated per device. It is recommended to generate an unique

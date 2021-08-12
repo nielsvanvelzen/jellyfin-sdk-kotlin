@@ -1,6 +1,7 @@
 package org.jellyfin.sdk.model.discovery
 
 import org.jellyfin.sdk.model.ServerVersion
+import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -8,6 +9,7 @@ import kotlin.test.assertTrue
 
 public class ServerVersionTests {
 	@Test
+	@JsName("Parses_correct_version_strings")
 	public fun `Parses correct version strings`() {
 		assertEquals(ServerVersion.fromString("10.6.4"), ServerVersion(10, 6, 4, null))
 		assertEquals(ServerVersion.fromString("10.7.0"), ServerVersion(10, 7, 0, null))
@@ -19,6 +21,7 @@ public class ServerVersionTests {
 	}
 
 	@Test
+	@JsName("Returns_null_for_incorrect_version_strings")
 	public fun `Returns null for incorrect version strings`() {
 		assertNull(ServerVersion.fromString("10.6.4-2"))
 		assertNull(ServerVersion.fromString("10.6.4.2.0"))
@@ -29,6 +32,7 @@ public class ServerVersionTests {
 	}
 
 	@Test
+	@JsName("Compares_to_other_versions")
 	public fun `Compares to other versions`() {
 		assertTrue { ServerVersion(10, 6, 0) == ServerVersion(10, 6, 0) }
 

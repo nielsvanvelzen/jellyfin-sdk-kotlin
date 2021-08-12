@@ -1,5 +1,8 @@
 package org.jellyfin.sdk.model
 
+import kotlin.js.JsExport
+
+@JsExport
 public data class BitrateMeasurement(
 	/**
 	 * Amount of bytes used to measure the bitrate.

@@ -2,12 +2,14 @@ package org.jellyfin.sdk.model
 
 import kotlinx.serialization.Serializable
 import org.jellyfin.sdk.model.ServerVersion.Companion.fromString
+import kotlin.js.JsExport
 
 /**
  * Model to help with Jellyfin server versions.
  * Use [fromString] to parse strings. The format is similar to SemVer.
  */
 @Serializable
+@JsExport
 public data class ServerVersion(
 	val major: Int,
 	val minor: Int,

@@ -1,0 +1,24 @@
+package org.jellyfin.sdk.model.serializer
+
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import org.jellyfin.sdk.model.UUID
+
+public actual fun String.toUUID(): UUID = this
+public actual fun String.toUUIDOrNull(): UUID? = this
+
+public actual class UUIDSerializer : KSerializer<UUID> {
+	actual override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("UUID", PrimitiveKind.STRING)
+
+	actual override fun deserialize(decoder: Decoder): UUID {
+		return decoder.decodeString()
+	}
+
+	actual override fun serialize(encoder: Encoder, value: UUID) {
+		encoder.encodeString(value)
+	}
+}
