@@ -24,7 +24,7 @@ public class QuickConnectApi(
 	 *
 	 * @param code Quick connect code to authorize.
 	 */
-	public suspend fun authorize(code: String): Response<Boolean> {
+	public suspend fun authorizeQuickConnect(code: String): Response<Boolean> {
 		val pathParameters = emptyMap<String, Any?>()
 		val queryParameters = buildMap<String, Any?>(1) {
 			put("code", code)
@@ -35,11 +35,22 @@ public class QuickConnectApi(
 	}
 
 	/**
+	 * Gets the current quick connect state.
+	 */
+	public suspend fun getQuickConnectEnabled(): Response<Boolean> {
+		val pathParameters = emptyMap<String, Any?>()
+		val queryParameters = emptyMap<String, Any?>()
+		val data = null
+		val response = api.`get`<Boolean>("/QuickConnect/Enabled", pathParameters, queryParameters, data)
+		return response
+	}
+
+	/**
 	 * Attempts to retrieve authentication information.
 	 *
 	 * @param secret Secret previously returned from the Initiate endpoint.
 	 */
-	public suspend fun connect(secret: String): Response<QuickConnectResult> {
+	public suspend fun getQuickConnectState(secret: String): Response<QuickConnectResult> {
 		val pathParameters = emptyMap<String, Any?>()
 		val queryParameters = buildMap<String, Any?>(1) {
 			put("secret", secret)
@@ -51,20 +62,9 @@ public class QuickConnectApi(
 	}
 
 	/**
-	 * Gets the current quick connect state.
-	 */
-	public suspend fun getEnabled(): Response<Boolean> {
-		val pathParameters = emptyMap<String, Any?>()
-		val queryParameters = emptyMap<String, Any?>()
-		val data = null
-		val response = api.`get`<Boolean>("/QuickConnect/Enabled", pathParameters, queryParameters, data)
-		return response
-	}
-
-	/**
 	 * Initiate a new quick connect request.
 	 */
-	public suspend fun initiate(): Response<QuickConnectResult> {
+	public suspend fun initiateQuickConnect(): Response<QuickConnectResult> {
 		val pathParameters = emptyMap<String, Any?>()
 		val queryParameters = emptyMap<String, Any?>()
 		val data = null

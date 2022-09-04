@@ -75,7 +75,7 @@ public data class GetItemsByUserIdRequest(
 	 * Optional. Return items that are siblings of a supplied item.
 	 */
 	@SerialName("adjacentTo")
-	public val adjacentTo: String? = null,
+	public val adjacentTo: UUID? = null,
 	/**
 	 * Optional filter by parent index number.
 	 */

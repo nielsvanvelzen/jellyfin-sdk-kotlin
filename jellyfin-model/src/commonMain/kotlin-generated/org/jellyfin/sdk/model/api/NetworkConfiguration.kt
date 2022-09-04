@@ -162,7 +162,7 @@ public data class NetworkConfiguration(
 	@SerialName("AutoDiscovery")
 	public val autoDiscovery: Boolean,
 	/**
-	 * Gets or sets the filter for remote IP connectivity. Used in conjuntion with
+	 * Gets or sets the filter for remote IP connectivity. Used in conjunction with
 	 * `P:Jellyfin.Networking.Configuration.NetworkConfiguration.IsRemoteIPFilterBlacklist`.
 	 */
 	@SerialName("RemoteIPFilter")

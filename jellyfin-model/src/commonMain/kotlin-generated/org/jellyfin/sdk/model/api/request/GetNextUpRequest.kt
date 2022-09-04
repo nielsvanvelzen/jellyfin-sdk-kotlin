@@ -12,7 +12,6 @@ package org.jellyfin.sdk.model.api.request
 
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.String
 import kotlin.collections.Collection
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -54,7 +53,7 @@ public data class GetNextUpRequest(
 	 * Optional. Filter by series id.
 	 */
 	@SerialName("seriesId")
-	public val seriesId: String? = null,
+	public val seriesId: UUID? = null,
 	/**
 	 * Optional. Specify this to localize the search to a specific item or folder. Omit to use the
 	 * root.

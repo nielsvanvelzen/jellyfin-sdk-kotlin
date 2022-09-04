@@ -37,7 +37,7 @@ import org.jellyfin.sdk.model.serializer.UUIDSerializer
 @Serializable
 public data class GetItemsRequest(
 	/**
-	 * The user id supplied as query parameter.
+	 * The user id supplied as query parameter; this is required when not using an API key.
 	 */
 	@SerialName("userId")
 	public val userId: UUID? = null,
@@ -75,7 +75,7 @@ public data class GetItemsRequest(
 	 * Optional. Return items that are siblings of a supplied item.
 	 */
 	@SerialName("adjacentTo")
-	public val adjacentTo: String? = null,
+	public val adjacentTo: UUID? = null,
 	/**
 	 * Optional filter by parent index number.
 	 */

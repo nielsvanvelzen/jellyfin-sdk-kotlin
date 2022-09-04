@@ -269,12 +269,12 @@ public data class BaseItemDto(
 	@SerialName("GenreItems")
 	public val genreItems: List<NameGuidPair>? = null,
 	/**
-	 * Gets or sets wether the item has a logo, this will hold the Id of the Parent that has one.
+	 * Gets or sets whether the item has a logo, this will hold the Id of the Parent that has one.
 	 */
 	@SerialName("ParentLogoItemId")
 	public val parentLogoItemId: UUID? = null,
 	/**
-	 * Gets or sets wether the item has any backdrops, this will hold the Id of the Parent that has
+	 * Gets or sets whether the item has any backdrops, this will hold the Id of the Parent that has
 	 * one.
 	 */
 	@SerialName("ParentBackdropItemId")
@@ -447,7 +447,7 @@ public data class BaseItemDto(
 	@SerialName("ParentLogoImageTag")
 	public val parentLogoImageTag: String? = null,
 	/**
-	 * Gets or sets wether the item has fan art, this will hold the Id of the Parent that has one.
+	 * Gets or sets whether the item has fan art, this will hold the Id of the Parent that has one.
 	 */
 	@SerialName("ParentArtItemId")
 	public val parentArtItemId: UUID? = null,

@@ -21,7 +21,7 @@ import org.jellyfin.sdk.model.serializer.UUIDSerializer
 @Serializable
 public data class RemoveFromPlaylistRequestDto(
 	/**
-	 * Gets or sets the playlist identifiers ot the items. Ignored when clearing the playlist.
+	 * Gets or sets the playlist identifiers of the items. Ignored when clearing the playlist.
 	 */
 	@SerialName("PlaylistItemIds")
 	public val playlistItemIds: List<UUID>,

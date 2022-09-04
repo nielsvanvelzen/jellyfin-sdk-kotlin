@@ -39,7 +39,8 @@ public class ItemsApi(
 	/**
 	 * Gets items based on a query.
 	 *
-	 * @param userId The user id supplied as query parameter.
+	 * @param userId The user id supplied as query parameter; this is required when not using an API
+	 * key.
 	 * @param maxOfficialRating Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
 	 * @param hasThemeSong Optional filter by items with theme songs.
 	 * @param hasThemeVideo Optional filter by items with theme videos.
@@ -173,7 +174,7 @@ public class ItemsApi(
 		hasSubtitles: Boolean? = null,
 		hasSpecialFeature: Boolean? = null,
 		hasTrailer: Boolean? = null,
-		adjacentTo: String? = null,
+		adjacentTo: UUID? = null,
 		parentIndexNumber: Int? = null,
 		hasParentalRating: Boolean? = null,
 		isHd: Boolean? = null,
@@ -576,7 +577,7 @@ public class ItemsApi(
 		hasSubtitles: Boolean? = null,
 		hasSpecialFeature: Boolean? = null,
 		hasTrailer: Boolean? = null,
-		adjacentTo: String? = null,
+		adjacentTo: UUID? = null,
 		parentIndexNumber: Int? = null,
 		hasParentalRating: Boolean? = null,
 		isHd: Boolean? = null,

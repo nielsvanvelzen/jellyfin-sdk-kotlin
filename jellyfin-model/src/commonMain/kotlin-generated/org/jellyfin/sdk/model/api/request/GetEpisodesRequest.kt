@@ -61,7 +61,7 @@ public data class GetEpisodesRequest(
 	 * Optional. Return items that are siblings of a supplied item.
 	 */
 	@SerialName("adjacentTo")
-	public val adjacentTo: String? = null,
+	public val adjacentTo: UUID? = null,
 	/**
 	 * Optional. Skip through the list until a given item is found.
 	 */

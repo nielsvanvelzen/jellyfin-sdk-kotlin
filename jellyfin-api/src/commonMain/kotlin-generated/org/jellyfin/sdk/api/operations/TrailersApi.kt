@@ -36,7 +36,8 @@ public class TrailersApi(
 	/**
 	 * Finds movies and trailers similar to a given trailer.
 	 *
-	 * @param userId The user id.
+	 * @param userId The user id supplied as query parameter; this is required when not using an API
+	 * key.
 	 * @param maxOfficialRating Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
 	 * @param hasThemeSong Optional filter by items with theme songs.
 	 * @param hasThemeVideo Optional filter by items with theme videos.
@@ -168,7 +169,7 @@ public class TrailersApi(
 		hasSubtitles: Boolean? = null,
 		hasSpecialFeature: Boolean? = null,
 		hasTrailer: Boolean? = null,
-		adjacentTo: String? = null,
+		adjacentTo: UUID? = null,
 		parentIndexNumber: Int? = null,
 		hasParentalRating: Boolean? = null,
 		isHd: Boolean? = null,

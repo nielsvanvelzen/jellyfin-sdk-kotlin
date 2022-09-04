@@ -22,7 +22,7 @@ import org.jellyfin.sdk.model.serializer.UUIDSerializer
  * Gets the search hint result.
  */
 @Serializable
-public data class GetRequest(
+public data class GetSearchHintsRequest(
 	/**
 	 * Optional. The record index to start at. All items with a lower index will be dropped from the
 	 * results.
@@ -46,19 +46,19 @@ public data class GetRequest(
 	public val searchTerm: String,
 	/**
 	 * If specified, only results with the specified item types are returned. This allows multiple,
-	 * comma delimeted.
+	 * comma delimited.
 	 */
 	@SerialName("includeItemTypes")
 	public val includeItemTypes: Collection<BaseItemKind>? = null,
 	/**
 	 * If specified, results with these item types are filtered out. This allows multiple, comma
-	 * delimeted.
+	 * delimited.
 	 */
 	@SerialName("excludeItemTypes")
 	public val excludeItemTypes: Collection<BaseItemKind>? = null,
 	/**
 	 * If specified, only results with the specified media types are returned. This allows multiple,
-	 * comma delimeted.
+	 * comma delimited.
 	 */
 	@SerialName("mediaTypes")
 	public val mediaTypes: Collection<String>? = null,

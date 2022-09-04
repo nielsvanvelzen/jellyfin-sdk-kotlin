@@ -455,7 +455,7 @@ public class AudioApi(
 	 * @param deviceProfileId Optional. The dlna device profile id to utilize.
 	 * @param playSessionId The play session id.
 	 * @param segmentContainer The segment container.
-	 * @param segmentLength The segment lenght.
+	 * @param segmentLength The segment length.
 	 * @param minSegments The minimum number of segments.
 	 * @param mediaSourceId The media version id, if playing an alternate version.
 	 * @param deviceId The device id of the client requesting. Used to stop encoding processes when
@@ -692,7 +692,7 @@ public class AudioApi(
 	 * @param deviceProfileId Optional. The dlna device profile id to utilize.
 	 * @param playSessionId The play session id.
 	 * @param segmentContainer The segment container.
-	 * @param segmentLength The segment lenght.
+	 * @param segmentLength The segment length.
 	 * @param minSegments The minimum number of segments.
 	 * @param mediaSourceId The media version id, if playing an alternate version.
 	 * @param deviceId The device id of the client requesting. Used to stop encoding processes when

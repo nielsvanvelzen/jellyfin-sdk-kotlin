@@ -68,7 +68,7 @@ public data class GetLiveHlsStreamRequest(
 	@SerialName("segmentContainer")
 	public val segmentContainer: String? = null,
 	/**
-	 * The segment lenght.
+	 * The segment length.
 	 */
 	@SerialName("segmentLength")
 	public val segmentLength: Int? = null,
