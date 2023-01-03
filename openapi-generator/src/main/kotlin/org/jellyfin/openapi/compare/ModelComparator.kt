@@ -23,6 +23,8 @@ class ModelComparator {
 		createModel = { oldProperty, newProperty ->
 			CompareModelProperty(
 				newProperty.name,
+				newProperty.type.isNullable,
+				newProperty.defaultValue,
 				buildCompareValueDiffCollection(oldProperty, newProperty) {
 					detect({ name }, "Name")
 					detect({ description }, "Description")

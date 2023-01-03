@@ -42,6 +42,8 @@ class OperationComparator {
 		newOperation: ApiServiceOperation,
 	) = CompareOperation(
 		name = newOperation.name,
+		method = newOperation.method,
+		path = newOperation.pathTemplate,
 		pathParameters = compareParameters(oldOperation?.pathParameters, newOperation.pathParameters),
 		queryParameters = compareParameters(oldOperation?.queryParameters, newOperation.queryParameters),
 		changes = buildCompareValueDiffCollection(oldOperation, newOperation) {

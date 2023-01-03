@@ -33,6 +33,7 @@ import org.jellyfin.openapi.compare.ModelComparator
 import org.jellyfin.openapi.compare.OperationComparator
 import org.jellyfin.openapi.compare.reporter.CompareReporter
 import org.jellyfin.openapi.compare.reporter.JsonCompareReporter
+import org.jellyfin.openapi.compare.reporter.MarkdownCompareReporter
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -46,6 +47,7 @@ val mainModule = module {
 
 	// Compare reporters
 	single { JsonCompareReporter() } bind CompareReporter::class
+	single { MarkdownCompareReporter() } bind CompareReporter::class
 
 	// OpenAPI
 	single { OpenApiTypeBuilder(getAll()) }
