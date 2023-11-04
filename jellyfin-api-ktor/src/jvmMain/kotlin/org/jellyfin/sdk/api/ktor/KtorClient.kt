@@ -18,6 +18,7 @@ import io.ktor.util.toMap
 import kotlinx.serialization.SerializationException
 import mu.KotlinLogging
 import org.jellyfin.sdk.api.client.ApiClient
+import org.jellyfin.sdk.api.client.AuthorizationProvider
 import org.jellyfin.sdk.api.client.HttpClientOptions
 import org.jellyfin.sdk.api.client.HttpMethod
 import org.jellyfin.sdk.api.client.RawResponse
@@ -50,10 +51,8 @@ import io.ktor.http.HttpMethod as KtorHttpMethod
 @Suppress("LongParameterList")
 public actual open class KtorClient actual constructor(
 	override var baseUrl: String?,
-	override var accessToken: String?,
-	override var userId: UUID?,
 	override var clientInfo: ClientInfo,
-	override var deviceInfo: DeviceInfo,
+	override var authorizationProvider: AuthorizationProvider,
 	override val httpClientOptions: HttpClientOptions,
 	private val socketConnectionFactory: SocketConnectionFactory,
 ) : ApiClient() {
@@ -77,6 +76,8 @@ public actual open class KtorClient actual constructor(
 		requestBody: Any?,
 	): RawResponse {
 		val url = createUrl(pathTemplate, pathParameters, queryParameters)
+		val accessToken = authorizationProvider.getAccessToken()
+		val deviceInfo = authorizationProvider.getDeviceInfo()
 
 		// Log HTTP call with access token removed
 		val logger = KotlinLogging.logger {}

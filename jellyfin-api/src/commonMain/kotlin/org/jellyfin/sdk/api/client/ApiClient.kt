@@ -5,8 +5,6 @@ import org.jellyfin.sdk.api.client.util.UrlBuilder
 import org.jellyfin.sdk.api.operations.Api
 import org.jellyfin.sdk.api.sockets.SocketInstance
 import org.jellyfin.sdk.model.ClientInfo
-import org.jellyfin.sdk.model.DeviceInfo
-import org.jellyfin.sdk.model.UUID
 import kotlin.reflect.KClass
 
 public abstract class ApiClient {
@@ -29,26 +27,14 @@ public abstract class ApiClient {
 	public abstract var baseUrl: String?
 
 	/**
-	 * Access token to use for requests. Appended to all requests if set.
-	 */
-	public abstract var accessToken: String?
-
-	/**
-	 * User identifier that will automatically be used in user-specific API operations.
-	 * Should correspond to the same user as [accessToken].
-	 */
-	public abstract var userId: UUID?
-
-	/**
 	 * Information about the client / application send in all API requests.
 	 */
 	public abstract var clientInfo: ClientInfo
 
 	/**
-	 * Information about the device send in all API requests. Only a single session is allowed per
-	 * device id.
+	 * The provider for authorization info.
 	 */
-	public abstract var deviceInfo: DeviceInfo
+	public abstract var authorizationProvider: AuthorizationProvider
 
 	/**
 	 * HTTP Options for this ApiClient.

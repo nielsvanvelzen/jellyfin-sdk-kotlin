@@ -1,6 +1,7 @@
 package org.jellyfin.sdk.api.ktor
 
 import org.jellyfin.sdk.api.client.ApiClient
+import org.jellyfin.sdk.api.client.AuthorizationProvider
 import org.jellyfin.sdk.api.client.HttpClientOptions
 import org.jellyfin.sdk.api.client.HttpMethod
 import org.jellyfin.sdk.api.client.RawResponse
@@ -13,10 +14,8 @@ import org.jellyfin.sdk.model.UUID
 @Suppress("LongParameterList")
 public expect open class KtorClient(
 	baseUrl: String? = null,
-	accessToken: String? = null,
-	userId: UUID? = null,
 	clientInfo: ClientInfo,
-	deviceInfo: DeviceInfo,
+	authorizationProvider: AuthorizationProvider,
 	httpClientOptions: HttpClientOptions,
 	socketConnectionFactory: SocketConnectionFactory,
 ) : ApiClient {

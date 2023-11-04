@@ -1,7 +1,10 @@
 package org.jellyfin.sdk
 
 import org.jellyfin.sdk.api.client.ApiClient
+import org.jellyfin.sdk.api.client.AuthorizationProvider
 import org.jellyfin.sdk.api.client.HttpClientOptions
+import org.jellyfin.sdk.api.client.MutableAuthorizationProvider
+import org.jellyfin.sdk.api.client.NoAuthorizationProvider
 import org.jellyfin.sdk.api.info.ApiConstants
 import org.jellyfin.sdk.discovery.DiscoveryService
 import org.jellyfin.sdk.model.ClientInfo
@@ -33,6 +36,36 @@ public class Jellyfin(
 
 	/**
 	 * Create a new API instance to use in API services.
+	 * The [authorizationProvider] parameter is required when not passed as option in [JellyfinOptions].
+	 * The [baseUrl] is only required when HTTP calls are made.
+	 *
+	 * Throws an [IllegalStateException] when the client or device information is missing.
+	 */
+	@JvmOverloads
+	@Suppress("LongParameterList")
+	public fun createApi(
+		baseUrl: String? = null,
+		clientInfo: ClientInfo = checkNotNull(options.clientInfo) {
+			"ClientInfo needs to be set when calling createApi() or by providing it when constructing the Jellyfin instance"
+		},
+		authorizationProvider: AuthorizationProvider = NoAuthorizationProvider(
+			deviceInfo = checkNotNull(options.deviceInfo) {
+				"AuthorizationProvider needs to be set when calling createApi() or by providing it when constructing the Jellyfin instance"
+			}
+		),
+		httpClientOptions: HttpClientOptions = HttpClientOptions(),
+	): ApiClient {
+		return options.apiClientFactory.create(
+			baseUrl = baseUrl,
+			clientInfo = clientInfo,
+			authorizationProvider = authorizationProvider,
+			httpClientOptions = httpClientOptions,
+			socketConnectionFactory = options.socketConnectionFactory,
+		)
+	}
+
+	/**
+	 * Create a new API instance to use in API services.
 	 * The [clientInfo] and [deviceInfo] parameters are required when not passed as option in [JellyfinOptions].
 	 * The [baseUrl] is only required when HTTP calls are made.
 	 *
@@ -55,14 +88,15 @@ public class Jellyfin(
 			"DeviceInfo needs to be set when calling createApi() or by providing it when constructing the Jellyfin instance"
 		}
 
-		return options.apiClientFactory.create(
+		return createApi(
 			baseUrl = baseUrl,
-			accessToken = accessToken,
-			userId = userId,
 			clientInfo = clientInfo,
-			deviceInfo = deviceInfo,
+			authorizationProvider = MutableAuthorizationProvider(
+				deviceInfo = deviceInfo,
+				accessToken = accessToken,
+				userId = userId,
+			),
 			httpClientOptions = httpClientOptions,
-			socketConnectionFactory = options.socketConnectionFactory,
 		)
 	}
 
