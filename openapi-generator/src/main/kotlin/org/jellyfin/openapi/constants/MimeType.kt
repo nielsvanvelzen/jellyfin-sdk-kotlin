@@ -6,6 +6,8 @@ object MimeType {
 	const val APPLICATION_OCTET_STREAM = "application/octet-stream"
 	const val APPLICATION_X_JAVASCRIPT = "application/x-javascript"
 	const val APPLICATION_X_MPEG_URL = "application/x-mpegURL"
+	const val APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded"
+	const val MULTIPART_FORM_DATA = "multipart/form-data"
 	const val AUDIO_ALL = "audio/*"
 	const val FONT_ALL = "font/*"
 	const val IMAGE_ALL = "image/*"
