@@ -7,7 +7,7 @@
 
 package org.jellyfin.sdk.model.api
 
-import kotlin.Int
+import kotlin.Long
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -18,7 +18,7 @@ import org.jellyfin.sdk.model.serializer.UUIDSerializer
  * Api model for MediaSegment's.
  */
 @Serializable
-public data class MediaSegmentModel(
+public data class MediaSegmentDto(
 	/**
 	 * The id of the media segment.
 	 */
@@ -30,18 +30,18 @@ public data class MediaSegmentModel(
 	@SerialName("ItemId")
 	public val itemId: UUID,
 	/**
+	 * Defines the types of content a individial Jellyfin.Data.Entities.MediaSegment represents.
+	 */
+	@SerialName("Type")
+	public val type: MediaSegmentType,
+	/**
 	 * The start of the segment.
 	 */
-	@SerialName("StartTick")
-	public val startTick: Int,
+	@SerialName("StartTicks")
+	public val startTicks: Long,
 	/**
 	 * The end of the segment.
 	 */
-	@SerialName("EndTick")
-	public val endTick: Int,
-	/**
-	 * The Type of content this segment defines.
-	 */
-	@SerialName("Type")
-	public val type: MediaSegmentTypeModel,
+	@SerialName("EndTicks")
+	public val endTicks: Long,
 )

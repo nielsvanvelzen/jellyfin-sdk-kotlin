@@ -7,31 +7,37 @@ package org.jellyfin.sdk.api.operations
 
 import kotlin.Any
 import kotlin.String
-import kotlin.collections.List
+import kotlin.collections.Collection
 import kotlin.collections.buildMap
-import kotlin.collections.emptyMap
+import kotlin.collections.emptyList
 import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.api.client.Response
 import org.jellyfin.sdk.api.client.extensions.`get`
 import org.jellyfin.sdk.model.UUID
-import org.jellyfin.sdk.model.api.MediaSegmentModel
+import org.jellyfin.sdk.model.api.MediaSegmentDtoQueryResult
+import org.jellyfin.sdk.model.api.MediaSegmentType
 
-public class MediaSegmentApi(
+public class MediaSegmentsApi(
 	private val api: ApiClient,
 ) : Api {
 	/**
 	 * Gets all media segments based on an itemId.
 	 *
 	 * @param itemId The ItemId.
+	 * @param includeSegmentTypes Optional filter of requested segmeent types.
 	 */
-	public suspend fun getSegmentsAsync(itemId: UUID): Response<List<MediaSegmentModel>> {
+	public suspend fun getSegmentsAsync(itemId: UUID,
+			includeSegmentTypes: Collection<MediaSegmentType>? = emptyList()):
+			Response<MediaSegmentDtoQueryResult> {
 		val pathParameters = buildMap<String, Any?>(1) {
 			put("itemId", itemId)
 		}
-		val queryParameters = emptyMap<String, Any?>()
+		val queryParameters = buildMap<String, Any?>(1) {
+			put("includeSegmentTypes", includeSegmentTypes)
+		}
 		val data = null
-		val response = api.`get`<List<MediaSegmentModel>>("/MediaSegment/MediaSegments/{itemId}",
-				pathParameters, queryParameters, data)
+		val response = api.`get`<MediaSegmentDtoQueryResult>("/MediaSegments/{itemId}", pathParameters,
+				queryParameters, data)
 		return response
 	}
 }

@@ -11,11 +11,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Defines the types of content a individial MediaBrowser.Model.MediaSegments.MediaSegmentModel
- * represents.
+ * Defines the types of content a individial Jellyfin.Data.Entities.MediaSegment represents.
  */
 @Serializable
-public enum class MediaSegmentTypeModel(
+public enum class MediaSegmentType(
 	public val serialName: String,
 ) {
 	@SerialName("Unknown")
@@ -41,7 +40,7 @@ public enum class MediaSegmentTypeModel(
 		/**
 		 * Find the enum member by the serial name or return null.
 		 */
-		public fun fromNameOrNull(serialName: String): MediaSegmentTypeModel? = when (serialName) {
+		public fun fromNameOrNull(serialName: String): MediaSegmentType? = when (serialName) {
 			"Unknown" -> UNKNOWN
 			"Commercial" -> COMMERCIAL
 			"Preview" -> PREVIEW
@@ -54,7 +53,7 @@ public enum class MediaSegmentTypeModel(
 		/**
 		 * Find the enum member by the serial name or throw.
 		 */
-		public fun fromName(serialName: String): MediaSegmentTypeModel =
+		public fun fromName(serialName: String): MediaSegmentType =
 				requireNotNull(fromNameOrNull(serialName)) { """Unknown value $serialName""" }
 	}
 }
