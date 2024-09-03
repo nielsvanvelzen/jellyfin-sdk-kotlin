@@ -108,6 +108,9 @@ public data class SessionInfo(
 	 */
 	@SerialName("ApplicationVersion")
 	public val applicationVersion: String? = null,
+	/**
+	 * Class holding information on a runnning transcode.
+	 */
 	@SerialName("TranscodingInfo")
 	public val transcodingInfo: TranscodingInfo? = null,
 	/**

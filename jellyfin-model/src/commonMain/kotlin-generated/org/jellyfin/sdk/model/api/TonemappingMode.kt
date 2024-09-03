@@ -11,26 +11,22 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Enum HardwareEncodingType.
+ * Enum containing tonemapping modes.
  */
 @Serializable
-public enum class HardwareEncodingType(
+public enum class TonemappingMode(
 	public val serialName: String,
 ) {
-	@SerialName("AMF")
-	AMF("AMF"),
-	@SerialName("QSV")
-	QSV("QSV"),
-	@SerialName("NVENC")
-	NVENC("NVENC"),
-	@SerialName("V4L2M2M")
-	V4L2M2M("V4L2M2M"),
-	@SerialName("VAAPI")
-	VAAPI("VAAPI"),
-	@SerialName("VideoToolBox")
-	VIDEO_TOOL_BOX("VideoToolBox"),
-	@SerialName("RKMPP")
-	RKMPP("RKMPP"),
+	@SerialName("auto")
+	AUTO("auto"),
+	@SerialName("max")
+	MAX("max"),
+	@SerialName("rgb")
+	RGB("rgb"),
+	@SerialName("lum")
+	LUM("lum"),
+	@SerialName("itp")
+	ITP("itp"),
 	;
 
 	/**
@@ -42,21 +38,19 @@ public enum class HardwareEncodingType(
 		/**
 		 * Find the enum member by the serial name or return null.
 		 */
-		public fun fromNameOrNull(serialName: String): HardwareEncodingType? = when (serialName) {
-			"AMF" -> AMF
-			"QSV" -> QSV
-			"NVENC" -> NVENC
-			"V4L2M2M" -> V4L2M2M
-			"VAAPI" -> VAAPI
-			"VideoToolBox" -> VIDEO_TOOL_BOX
-			"RKMPP" -> RKMPP
+		public fun fromNameOrNull(serialName: String): TonemappingMode? = when (serialName) {
+			"auto" -> AUTO
+			"max" -> MAX
+			"rgb" -> RGB
+			"lum" -> LUM
+			"itp" -> ITP
 			else -> null
 		}
 
 		/**
 		 * Find the enum member by the serial name or throw.
 		 */
-		public fun fromName(serialName: String): HardwareEncodingType =
+		public fun fromName(serialName: String): TonemappingMode =
 				requireNotNull(fromNameOrNull(serialName)) { """Unknown value $serialName""" }
 	}
 }

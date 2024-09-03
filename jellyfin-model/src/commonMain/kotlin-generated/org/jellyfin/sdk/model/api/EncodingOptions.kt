@@ -82,7 +82,7 @@ public data class EncodingOptions(
 	 * The hardware acceleration type.
 	 */
 	@SerialName("HardwareAccelerationType")
-	public val hardwareAccelerationType: String? = null,
+	public val hardwareAccelerationType: HardwareAccelerationType,
 	/**
 	 * The FFmpeg path as set by the user via the UI.
 	 */
@@ -117,17 +117,17 @@ public data class EncodingOptions(
 	 * The tone-mapping algorithm.
 	 */
 	@SerialName("TonemappingAlgorithm")
-	public val tonemappingAlgorithm: String? = null,
+	public val tonemappingAlgorithm: TonemappingAlgorithm,
 	/**
 	 * The tone-mapping mode.
 	 */
 	@SerialName("TonemappingMode")
-	public val tonemappingMode: String? = null,
+	public val tonemappingMode: TonemappingMode,
 	/**
 	 * The tone-mapping range.
 	 */
 	@SerialName("TonemappingRange")
-	public val tonemappingRange: String? = null,
+	public val tonemappingRange: TonemappingRange,
 	/**
 	 * The tone-mapping desaturation.
 	 */
@@ -167,7 +167,7 @@ public data class EncodingOptions(
 	 * The encoder preset.
 	 */
 	@SerialName("EncoderPreset")
-	public val encoderPreset: String? = null,
+	public val encoderPreset: EncoderPreset? = null,
 	/**
 	 * A value indicating whether the framerate is doubled when deinterlacing.
 	 */
@@ -177,7 +177,7 @@ public data class EncodingOptions(
 	 * The deinterlace method.
 	 */
 	@SerialName("DeinterlaceMethod")
-	public val deinterlaceMethod: String? = null,
+	public val deinterlaceMethod: DeinterlaceMethod,
 	/**
 	 * A value indicating whether 10bit HEVC decoding is enabled.
 	 */
