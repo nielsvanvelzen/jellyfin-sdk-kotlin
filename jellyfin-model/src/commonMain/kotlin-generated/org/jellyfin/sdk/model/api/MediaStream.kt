@@ -94,6 +94,11 @@ public data class MediaStream(
 	@SerialName("DvBlSignalCompatibilityId")
 	public val dvBlSignalCompatibilityId: Int? = null,
 	/**
+	 * The Rotation in degrees.
+	 */
+	@SerialName("Rotation")
+	public val rotation: Int? = null,
+	/**
 	 * The comment.
 	 */
 	@SerialName("Comment")

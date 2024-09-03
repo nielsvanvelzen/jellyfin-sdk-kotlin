@@ -82,6 +82,10 @@ public data class LibraryOptions(
 	public val saveSubtitlesWithMedia: Boolean,
 	@SerialName("SaveLyricsWithMedia")
 	public val saveLyricsWithMedia: Boolean = false,
+	@SerialName("DisabledLyricFetchers")
+	public val disabledLyricFetchers: List<String>,
+	@SerialName("LyricFetcherOrder")
+	public val lyricFetcherOrder: List<String>,
 	@SerialName("AutomaticallyAddToCollection")
 	public val automaticallyAddToCollection: Boolean,
 	/**
