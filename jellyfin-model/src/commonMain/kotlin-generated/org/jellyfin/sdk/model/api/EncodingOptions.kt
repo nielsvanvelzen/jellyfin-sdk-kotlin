@@ -99,6 +99,11 @@ public data class EncodingOptions(
 	@SerialName("VaapiDevice")
 	public val vaapiDevice: String? = null,
 	/**
+	 * The QSV device.
+	 */
+	@SerialName("QsvDevice")
+	public val qsvDevice: String? = null,
+	/**
 	 * A value indicating whether tonemapping is enabled.
 	 */
 	@SerialName("EnableTonemapping")

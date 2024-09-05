@@ -7,6 +7,7 @@
 
 package org.jellyfin.sdk.model.api
 
+import kotlin.Long
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -14,24 +15,33 @@ import org.jellyfin.sdk.model.UUID
 import org.jellyfin.sdk.model.serializer.UUIDSerializer
 
 /**
- * Plugin installation completed message.
+ * Api model for MediaSegment's.
  */
 @Serializable
-@SerialName("PackageInstallationCompleted")
-public data class PluginInstallationCompletedMessage(
+public data class MediaSegmentDto(
 	/**
-	 * Class InstallationInfo.
+	 * The id of the media segment.
 	 */
-	@SerialName("Data")
-	public val `data`: InstallationInfo? = null,
+	@SerialName("Id")
+	public val id: UUID,
 	/**
-	 * The message id.
+	 * The id of the associated item.
 	 */
-	@SerialName("MessageId")
-	override val messageId: UUID,
-) : OutboundWebSocketMessage {
+	@SerialName("ItemId")
+	public val itemId: UUID,
 	/**
-	 * The different kinds of messages that are used in the WebSocket api.
+	 * The type of content this segment defines.
 	 */
-	override val messageType: SessionMessageType = SessionMessageType.PACKAGE_INSTALLATION_COMPLETED
-}
+	@SerialName("Type")
+	public val type: MediaSegmentType,
+	/**
+	 * The start of the segment.
+	 */
+	@SerialName("StartTicks")
+	public val startTicks: Long,
+	/**
+	 * The end of the segment.
+	 */
+	@SerialName("EndTicks")
+	public val endTicks: Long,
+)
