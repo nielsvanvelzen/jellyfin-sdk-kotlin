@@ -22,16 +22,25 @@ import org.jellyfin.sdk.model.serializer.DateTimeSerializer
 import org.jellyfin.sdk.model.serializer.UUIDSerializer
 
 /**
- * Class SessionInfo.
+ * Session info DTO.
  */
 @Serializable
-public data class SessionInfo(
+public data class SessionInfoDto(
+	/**
+	 * The play state.
+	 */
 	@SerialName("PlayState")
 	public val playState: PlayerStateInfo? = null,
+	/**
+	 * The additional users.
+	 */
 	@SerialName("AdditionalUsers")
 	public val additionalUsers: List<SessionUserInfo>? = null,
+	/**
+	 * The client capabilities.
+	 */
 	@SerialName("Capabilities")
-	public val capabilities: ClientCapabilities? = null,
+	public val capabilities: ClientCapabilitiesDto? = null,
 	/**
 	 * The remote end point.
 	 */
@@ -88,14 +97,12 @@ public data class SessionInfo(
 	@SerialName("DeviceType")
 	public val deviceType: String? = null,
 	/**
-	 * This is strictly used as a data transfer object from the api layer.
-	 * This holds information about a BaseItem in a format that is convenient for the client.
+	 * The now playing item.
 	 */
 	@SerialName("NowPlayingItem")
 	public val nowPlayingItem: BaseItemDto? = null,
 	/**
-	 * This is strictly used as a data transfer object from the api layer.
-	 * This holds information about a BaseItem in a format that is convenient for the client.
+	 * The now viewing item.
 	 */
 	@SerialName("NowViewingItem")
 	public val nowViewingItem: BaseItemDto? = null,
@@ -109,27 +116,54 @@ public data class SessionInfo(
 	 */
 	@SerialName("ApplicationVersion")
 	public val applicationVersion: String? = null,
+	/**
+	 * The transcoding info.
+	 */
 	@SerialName("TranscodingInfo")
 	public val transcodingInfo: TranscodingInfo? = null,
 	/**
-	 * A value indicating whether this instance is active.
+	 * A value indicating whether this session is active.
 	 */
 	@SerialName("IsActive")
 	public val isActive: Boolean,
+	/**
+	 * A value indicating whether the session supports media control.
+	 */
 	@SerialName("SupportsMediaControl")
 	public val supportsMediaControl: Boolean,
+	/**
+	 * A value indicating whether the session supports remote control.
+	 */
 	@SerialName("SupportsRemoteControl")
 	public val supportsRemoteControl: Boolean,
+	/**
+	 * The now playing queue.
+	 */
 	@SerialName("NowPlayingQueue")
 	public val nowPlayingQueue: List<QueueItem>? = null,
+	/**
+	 * The now playing queue full items.
+	 */
 	@SerialName("NowPlayingQueueFullItems")
 	public val nowPlayingQueueFullItems: List<BaseItemDto>? = null,
+	/**
+	 * A value indicating whether the session has a custom device name.
+	 */
 	@SerialName("HasCustomDeviceName")
 	public val hasCustomDeviceName: Boolean,
+	/**
+	 * The playlist item id.
+	 */
 	@SerialName("PlaylistItemId")
 	public val playlistItemId: String? = null,
+	/**
+	 * The server id.
+	 */
 	@SerialName("ServerId")
 	public val serverId: String? = null,
+	/**
+	 * The user primary image tag.
+	 */
 	@SerialName("UserPrimaryImageTag")
 	public val userPrimaryImageTag: String? = null,
 	/**

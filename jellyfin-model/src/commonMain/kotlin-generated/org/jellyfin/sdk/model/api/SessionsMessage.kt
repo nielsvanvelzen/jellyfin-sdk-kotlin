@@ -24,7 +24,7 @@ public data class SessionsMessage(
 	 * The data.
 	 */
 	@SerialName("Data")
-	public val `data`: List<SessionInfo>? = null,
+	public val `data`: List<SessionInfoDto>? = null,
 	/**
 	 * The message id.
 	 */
