@@ -50,7 +50,7 @@ public data class SessionInfoDto(
 	 * The playable media types.
 	 */
 	@SerialName("PlayableMediaTypes")
-	public val playableMediaTypes: List<MediaType>? = null,
+	public val playableMediaTypes: List<MediaType>,
 	/**
 	 * The id.
 	 */
@@ -170,5 +170,5 @@ public data class SessionInfoDto(
 	 * The supported commands.
 	 */
 	@SerialName("SupportedCommands")
-	public val supportedCommands: List<GeneralCommandType>? = null,
+	public val supportedCommands: List<GeneralCommandType>,
 )
