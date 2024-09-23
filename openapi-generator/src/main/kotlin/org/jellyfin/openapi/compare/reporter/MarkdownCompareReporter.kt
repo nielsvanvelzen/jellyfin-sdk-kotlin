@@ -171,6 +171,7 @@ class MarkdownCompareReporter : CompareReporter {
 
 	private fun String.escape(): String =
 		replace(Regex("[\\\\`*_{}\\[\\]<>()#+-\\.!\\|@]")) { "\\${it.groups[0]!!.value}" }
+			.replace(Regex("\\r\\n|\\r|\\n"), "<br/>")
 
 	private fun String.bold(): String = "**${trim()}**"
 	private fun String.italic(): String = "_${trim()}_"
