@@ -24,7 +24,7 @@ import org.jellyfin.sdk.model.serializer.UUIDSerializer
  * Query parameters are obsolete.
  */
 @Serializable
-public data class GetPostedPlaybackInfoDeprecatedRequest(
+public data class GetPostedPlaybackInfoRequest(
 	/**
 	 * The item id.
 	 */

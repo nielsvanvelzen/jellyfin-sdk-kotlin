@@ -8,7 +8,6 @@ package org.jellyfin.sdk.api.operations
 import io.ktor.utils.io.ByteReadChannel
 import kotlin.Any
 import kotlin.Boolean
-import kotlin.Deprecated
 import kotlin.Int
 import kotlin.Long
 import kotlin.String
@@ -25,7 +24,7 @@ import org.jellyfin.sdk.model.api.LiveStreamResponse
 import org.jellyfin.sdk.model.api.OpenLiveStreamDto
 import org.jellyfin.sdk.model.api.PlaybackInfoDto
 import org.jellyfin.sdk.model.api.PlaybackInfoResponse
-import org.jellyfin.sdk.model.api.request.GetPostedPlaybackInfoDeprecatedRequest
+import org.jellyfin.sdk.model.api.request.GetPostedPlaybackInfoRequest
 import org.jellyfin.sdk.model.api.request.OpenLiveStreamRequest
 
 public class MediaInfoApi(
@@ -103,24 +102,6 @@ public class MediaInfoApi(
 	 * Query parameters are obsolete.
 	 *
 	 * @param itemId The item id.
-	 */
-	public suspend fun getPostedPlaybackInfo(itemId: UUID, `data`: PlaybackInfoDto? = null):
-			Response<PlaybackInfoResponse> {
-		val pathParameters = buildMap<String, Any?>(1) {
-			put("itemId", itemId)
-		}
-		val queryParameters = emptyMap<String, Any?>()
-		val response = api.post<PlaybackInfoResponse>("/Items/{itemId}/PlaybackInfo", pathParameters,
-				queryParameters, data)
-		return response
-	}
-
-	/**
-	 * For backwards compatibility parameters can be sent via Query or Body, with Query having higher
-	 * precedence.
-	 * Query parameters are obsolete.
-	 *
-	 * @param itemId The item id.
 	 * @param userId The user id.
 	 * @param maxStreamingBitrate The maximum streaming bitrate.
 	 * @param startTimeTicks The start time in ticks.
@@ -136,8 +117,7 @@ public class MediaInfoApi(
 	 * @param allowVideoStreamCopy Whether to allow to copy the video stream. Default: true.
 	 * @param allowAudioStreamCopy Whether to allow to copy the audio stream. Default: true.
 	 */
-	@Deprecated("This member is deprecated and may be removed in the future")
-	public suspend fun getPostedPlaybackInfoDeprecated(
+	public suspend fun getPostedPlaybackInfo(
 		itemId: UUID,
 		userId: UUID? = null,
 		maxStreamingBitrate: Int? = null,
@@ -186,10 +166,8 @@ public class MediaInfoApi(
 	 *
 	 * @param request The request parameters
 	 */
-	@Deprecated("This member is deprecated and may be removed in the future")
-	public suspend fun getPostedPlaybackInfoDeprecated(request: GetPostedPlaybackInfoDeprecatedRequest,
-			`data`: PlaybackInfoDto? = null): Response<PlaybackInfoResponse> =
-			getPostedPlaybackInfoDeprecated(
+	public suspend fun getPostedPlaybackInfo(request: GetPostedPlaybackInfoRequest,
+			`data`: PlaybackInfoDto? = null): Response<PlaybackInfoResponse> = getPostedPlaybackInfo(
 		itemId = request.itemId,
 		userId = request.userId,
 		maxStreamingBitrate = request.maxStreamingBitrate,

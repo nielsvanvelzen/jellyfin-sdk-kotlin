@@ -8,6 +8,7 @@
 package org.jellyfin.sdk.model.api.request
 
 import kotlin.Boolean
+import kotlin.Deprecated
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
@@ -53,6 +54,12 @@ public data class GetVideoStreamRequest(
 	 */
 	@SerialName("tag")
 	public val tag: String? = null,
+	/**
+	 * Optional. The dlna device profile id to utilize.
+	 */
+	@Deprecated("This member is deprecated and may be removed in the future")
+	@SerialName("deviceProfileId")
+	public val deviceProfileId: String? = null,
 	/**
 	 * The play session id.
 	 */

@@ -8,6 +8,7 @@
 package org.jellyfin.sdk.model.api.request
 
 import kotlin.Boolean
+import kotlin.Deprecated
 import kotlin.Int
 import kotlin.Long
 import kotlin.String
@@ -42,6 +43,30 @@ public data class GetSubtitleRequest(
 	 */
 	@SerialName("routeFormat")
 	public val routeFormat: String,
+	/**
+	 * The item id.
+	 */
+	@Deprecated("This member is deprecated and may be removed in the future")
+	@SerialName("itemId")
+	public val itemId: UUID? = null,
+	/**
+	 * The media source id.
+	 */
+	@Deprecated("This member is deprecated and may be removed in the future")
+	@SerialName("mediaSourceId")
+	public val mediaSourceId: String? = null,
+	/**
+	 * The subtitle stream index.
+	 */
+	@Deprecated("This member is deprecated and may be removed in the future")
+	@SerialName("index")
+	public val index: Int? = null,
+	/**
+	 * The format of the returned subtitle.
+	 */
+	@Deprecated("This member is deprecated and may be removed in the future")
+	@SerialName("format")
+	public val format: String? = null,
 	/**
 	 * Optional. The end position of the subtitle in ticks.
 	 */
