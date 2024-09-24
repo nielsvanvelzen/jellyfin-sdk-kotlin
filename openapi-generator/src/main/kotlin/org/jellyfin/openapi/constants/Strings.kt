@@ -28,11 +28,6 @@ object Strings {
 	const val DEFAULT_API_SERVICE = "Misc"
 
 	/**
-	 * The suffix added to the name of a deprecated operation.
-	 */
-	const val DEPRECATED_OPERATION_SUFFIX = "Deprecated"
-
-	/**
 	 * The suffix added to the name of a URL operation. Added after [URL_OPERATION_SUFFIX].
 	 */
 	const val URL_OPERATION_SUFFIX = "Url"

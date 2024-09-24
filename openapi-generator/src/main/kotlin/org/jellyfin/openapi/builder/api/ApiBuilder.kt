@@ -14,7 +14,6 @@ import org.jellyfin.openapi.constants.Strings
 import org.jellyfin.openapi.hooks.OperationRequestModelHook
 import org.jellyfin.openapi.hooks.OperationUrlHook
 import org.jellyfin.openapi.model.ApiService
-import org.jellyfin.openapi.model.ApiServiceOperation
 import org.jellyfin.openapi.model.GeneratorContext
 import org.jellyfin.openapi.model.JellyFile
 
@@ -28,26 +27,6 @@ class ApiBuilder(
 	private val operationRequestModelHooks: Collection<OperationRequestModelHook>,
 	private val fileSpecBuilder: FileSpecBuilder,
 ) : ContextBuilder<ApiService, Unit> {
-	private fun buildAdditionalOperations(operations: Collection<ApiServiceOperation>) =
-		operations.map { namedOperation ->
-			// Check if any member is deprecated
-			if (namedOperation.queryParameters.any { it.deprecated }) {
-				// Return 2 operations, one with and one without deprecated members
-				listOf(
-					// Remove deprecated parameters from normal function
-					namedOperation.copy(
-						queryParameters = namedOperation.queryParameters.filterNot { it.deprecated }
-					),
-					// Add new "deprecated" function with old parameters
-					namedOperation.copy(
-						name = namedOperation.name + Strings.DEPRECATED_OPERATION_SUFFIX,
-						// Mark the operation as deprecated
-						deprecated = true
-					)
-				)
-			} else listOf(namedOperation)
-		}.flatten()
-
 	private fun buildTypeSpec(context: GeneratorContext, data: ApiService) = TypeSpec.classBuilder(data.name).apply {
 		// Add "Api" interface as super
 		addSuperinterface(ClassName(Packages.API, Classes.API_INTERFACE))
@@ -63,11 +42,8 @@ class ApiBuilder(
 				.build()
 		)
 
-		// Create additional operations like the deprecated version
-		val operations = buildAdditionalOperations(data.operations)
-
 		// Add operations
-		operations
+		data.operations
 			.sortedBy { it.name }
 			.forEach { namedOperation ->
 				val createRequestModelVariant = operationRequestModelHooks.any {
