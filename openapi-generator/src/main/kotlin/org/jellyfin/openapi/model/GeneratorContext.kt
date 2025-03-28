@@ -26,13 +26,17 @@ class GeneratorContext(
 	private val _apiServices = mutableListOf<ApiService>()
 	val apiServices: Collection<ApiService> get() = _apiServices
 
+	fun getSchema(reference: String): Schema<Any>? {
+		val name = reference.removePrefix("#/components/schemas/")
+		val schema = schemas[name] ?: return null
+		if (schema.name == null) schema.name = name.toPascalCase(from = CaseFormat.CAPITALIZED_CAMEL)
+		return schema
+	}
+
 	fun getOrGenerateModel(reference: String): ApiModel {
 		val name = reference.removePrefix("#/components/schemas/")
-
 		return _models.getOrPut(name) {
-			val schema = requireNotNull(schemas[name]) { "Invalid schema $reference" }
-
-			if (schema.name == null) schema.name = name.toPascalCase(from = CaseFormat.CAPITALIZED_CAMEL)
+			val schema = requireNotNull(getSchema(name)) { "Invalid schema $reference" }
 			openApiModelBuilder.build(this, schema)
 		}
 	}
