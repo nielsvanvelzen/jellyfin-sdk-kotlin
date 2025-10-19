@@ -4,6 +4,7 @@ plugins {
 	kotlin("multiplatform")
 	alias(libs.plugins.kotlin.serialization)
 	alias(libs.plugins.dokka)
+	alias(libs.plugins.dokka.javadoc)
 	alias(libs.plugins.animalsniffer)
 }
 
@@ -52,17 +53,7 @@ kotlin {
 	}
 }
 
-enablePublishing {
-	val javadocJar by tasks.registering(Jar::class) {
-		dependsOn(tasks.dokkaHtml)
-		from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-		archiveClassifier.set("javadoc")
-	}
-
-	publications.withType<MavenPublication> {
-		artifact(javadocJar)
-	}
-}
+enablePublishing()
 
 dependencies.signature(libs.gummybears.api19) {
 	artifact {
