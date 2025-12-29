@@ -1,6 +1,6 @@
 package org.jellyfin.openapi.model
 
-data class IntRangeValidation(
+data class StringLengthValidation(
 	val min: Int?,
 	val max: Int?,
 ) : ParameterValidation

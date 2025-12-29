@@ -23,6 +23,7 @@ import org.jellyfin.openapi.model.DescriptionType
 import org.jellyfin.openapi.model.IntRangeValidation
 import org.jellyfin.openapi.model.ParameterValidation
 import org.jellyfin.openapi.model.RegexValidation
+import org.jellyfin.openapi.model.StringLengthValidation
 
 open class OperationBuilder(
 	private val descriptionBuilder: DescriptionBuilder,
@@ -59,13 +60,24 @@ open class OperationBuilder(
 		parameter: ApiServiceOperationParameter,
 		validation: ParameterValidation,
 	) = when (validation) {
-		is IntRangeValidation -> addStatement(
-			"%M(%N in %L..%L) { %S }",
-			MemberName("kotlin", "require"),
-			parameter.name,
-			validation.min,
-			validation.max,
-			"Parameter \"${parameter.name}\" must be in range ${validation.min}..${validation.max} (inclusive)."
+		is IntRangeValidation -> addCode(
+			CodeBlock.builder().apply {
+				if (validation.min != null) addStatement(
+					"%M(%N < %L) { %P }",
+					MemberName("kotlin", "require"),
+					parameter.name,
+					validation.min,
+					"Parameter \"${parameter.name}\" must be higher then or equals to ${validation.min}."
+				)
+
+				if (validation.max != null) addStatement(
+					"%M(%N > %L) { %P }",
+					MemberName("kotlin", "require"),
+					parameter.name,
+					validation.max,
+					"Parameter \"${parameter.name}\" must be lower then or equal to ${validation.max}."
+				)
+			}.build()
 		)
 
 		is RegexValidation -> addCode(CodeBlock.builder().apply {
@@ -90,6 +102,26 @@ open class OperationBuilder(
 				)
 			}
 		}.build())
+
+		is StringLengthValidation -> addCode(
+			CodeBlock.builder().apply {
+				if (validation.min != null) addStatement(
+					"%M(%N.length < %L) { %P }",
+					MemberName("kotlin", "require"),
+					parameter.name,
+					validation.min,
+					"Parameter \"${parameter.name}\" must have a length of at least ${validation.min} characters."
+				)
+
+				if (validation.max != null) addStatement(
+					"%M(%N.length > %L) { %P }",
+					MemberName("kotlin", "require"),
+					parameter.name,
+					validation.max,
+					"Parameter \"${parameter.name}\" must have a length of at most ${validation.max} characters."
+				)
+			}.build()
+		)
 	}
 
 	protected fun FunSpec.Builder.addParameterMapStatements(

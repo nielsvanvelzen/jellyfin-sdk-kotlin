@@ -1,6 +1,7 @@
 package org.jellyfin.openapi.builder.openapi
 
 import com.squareup.kotlinpoet.TypeName
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.swagger.v3.oas.models.Operation
 import io.swagger.v3.oas.models.PathItem
 import io.swagger.v3.oas.models.Paths
@@ -9,7 +10,6 @@ import io.swagger.v3.oas.models.media.Schema
 import io.swagger.v3.oas.models.media.StringSchema
 import io.swagger.v3.oas.models.parameters.Parameter
 import io.swagger.v3.oas.models.parameters.RequestBody
-import io.github.oshai.kotlinlogging.KotlinLogging
 import net.pearx.kasechange.CaseFormat
 import net.pearx.kasechange.toCamelCase
 import org.jellyfin.openapi.OpenApiGeneratorError
@@ -32,6 +32,7 @@ import org.jellyfin.openapi.model.HttpMethod
 import org.jellyfin.openapi.model.IntRangeValidation
 import org.jellyfin.openapi.model.ParameterValidation
 import org.jellyfin.openapi.model.RegexValidation
+import org.jellyfin.openapi.model.StringLengthValidation
 
 private val logger = KotlinLogging.logger { }
 
@@ -85,12 +86,19 @@ class OpenApiApiServicesBuilder(
 	}
 
 	private fun buildValidation(schema: Schema<*>): ParameterValidation? = when {
-		schema is IntegerSchema && schema.minimum != null && schema.maximum != null -> IntRangeValidation(
-			schema.minimum.intValueExact(),
-			schema.maximum.intValueExact()
+		schema is IntegerSchema && (schema.minimum != null || schema.maximum != null) -> IntRangeValidation(
+			min = schema.minimum?.intValueExact(),
+			max = schema.maximum?.intValueExact()
 		)
 
-		schema is StringSchema && schema.pattern != null -> RegexValidation(schema.pattern)
+		schema is StringSchema && schema.pattern != null -> RegexValidation(
+			pattern = schema.pattern
+		)
+
+		schema is StringSchema && (schema.minLength != null || schema.maxLength != null) -> StringLengthValidation(
+			min = schema.minLength,
+			max = schema.maxLength,
+		)
 
 		else -> null
 	}
